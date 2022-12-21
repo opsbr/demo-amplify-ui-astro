@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^4.0.0",
     "@astrojs/react": "^1.2.2",
     "@aws-amplify/ui-react": "^4.2.1",
     "@types/react": "^18.0.26",
