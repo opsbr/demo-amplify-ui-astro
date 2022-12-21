@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@astrojs/react": "^1.2.2",
+    "@aws-amplify/ui-react": "^4.2.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "astro": "^1.7.2",
+    "aws-amplify": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

@@ -1,50 +1,62 @@
-# Welcome to [Astro](https://astro.build)
+# demo-amplify-ui-astro
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/s/github/withastro/astro/tree/latest/examples/basics)
+This repository is for reproducing an issue of Amplify UI with Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Reproduce
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
-
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+Clone this repository and run `npm run build`:
 
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+node ➜ /workspaces/demo-amplify-ui-astro (main) $ npm run build
+
+> @example/basics@0.0.1 build
+> astro build
+
+08:22:28 AM [build] output target: static
+08:22:28 AM [build] Collecting build info...
+08:22:28 AM [build] Completed in 9ms.
+08:22:28 AM [build] Building static entrypoints...
+08:22:29 AM [build] Completed in 528ms.
+
+ building client
+Completed in 492ms.
+
+
+ generating static routes
+ error   Named export 'withAuthenticator' not found. The requested module '@aws-amplify/ui-react' is a CommonJS module, which may not support all module.exports as named exports.
+  CommonJS modules can always be imported via the default export, for example using:
+
+  import pkg from '@aws-amplify/ui-react';
+  const { withAuthenticator } = pkg;
+
+  File:
+    /workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/generate.js:61:20
+  Code:
+    60 |   const ssrEntryURL = new URL("./" + serverEntry + `?time=${Date.now()}`, outFolder);
+    > 61 |   const ssrEntry = await import(ssrEntryURL.toString());
+         |                    ^
+      62 |   const builtPaths = /* @__PURE__ */ new Set();
+      63 |   if (opts.settings.config.experimental.prerender && opts.settings.config.output === "server") {
+      64 |     for (const pageData of eachPrerenderedPageData(internals)) {
+  Stacktrace:
+file:///workspaces/demo-amplify-ui-astro/dist/entry.mjs?time=1671610949862:4
+/* empty css                                 */import { withAuthenticator } from '@aws-amplify/ui-react';
+                                                        ^^^^^^^^^^^^^^^^^
+SyntaxError: Named export 'withAuthenticator' not found. The requested module '@aws-amplify/ui-react' is a CommonJS module, which may not support all module.exports as named exports.
+CommonJS modules can always be imported via the default export, for example using:
+
+import pkg from '@aws-amplify/ui-react';
+const { withAuthenticator } = pkg;
+
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:123:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:189:5)
+    at async Promise.all (index 0)
+    at async ESMLoader.import (node:internal/modules/esm/loader:530:24)
+    at async generatePages (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/generate.js:61:20)
+    at async staticBuild (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/static-build.js:68:7)
+    at async AstroBuilder.build (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/index.js:86:5)
+    at async AstroBuilder.run (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/index.js:127:7)
+    at async build (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/core/build/index.js:21:3)
+    at async runCommand (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/cli/index.js:150:14)
+    at async cli (file:///workspaces/demo-amplify-ui-astro/node_modules/astro/dist/cli/index.js:168:5)
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
